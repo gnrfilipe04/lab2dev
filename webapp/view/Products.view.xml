@@ -1,0 +1,47 @@
+<mvc:View
+	controllerName="ProductsLab2Dev.controller.Products"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<List
+		id="invoiceList"
+		headerText="{i18n>productListTitle}"
+		class="sapUiResponsiveMargin"
+		width="auto"
+		items="{
+	         path : 'invoice>/',
+	         sorter : {
+	         
+		         path : 'ProductID',
+		         group : false
+	         
+	         }
+	      }">
+		 <headerToolbar>
+         <Toolbar>
+            <Title text="{i18n>productListTitle}"/>
+            <ToolbarSpacer/>
+            <SearchField width="50%" search=".onFilterInvoices"/>
+         </Toolbar>
+    	</headerToolbar>
+		<items>
+			<ObjectListItem
+				title="{invoice>ProductName}"
+				number="{
+					parts: [{path: 'invoice>UnitPrice'}, {path: 'view>/currency'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false
+					}
+				}"
+				intro="{i18n>productId}: {invoice>ProductID}"
+				numberUnit="{view>/currency}"
+				numberState="{=	${invoice>UnitPrice} > 0 ? 'Success' : 'Error' }"
+				type="Navigation"
+				press="onPress">
+				<ObjectAttribute
+				text="{i18n>productStock}: {invoice>UnitsInStock}"
+				/>
+			</ObjectListItem>
+		</items>
+	</List>
+</mvc:View>

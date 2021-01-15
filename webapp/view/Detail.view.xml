@@ -1,0 +1,34 @@
+<mvc:View
+	controllerName="ProductsLab2Dev.controller.Detail"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		title="{i18n>detailPageTitle}"
+		showNavButton="true"
+		navButtonPress=".onNavBack">
+		<ObjectHeader
+			intro="{i18n>productId}: {invoice>ProductID}"
+			title="{invoice>ProductName}"
+			number="{
+					parts: [{path: 'invoice>UnitPrice'}, {path: 'view>/currency'}],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false
+					}
+				}"
+			
+			numberUnit="{view>/currency}"
+			numberState="{=${invoice>Discontinued} === true ? 'Error' : 'Success' }">
+			<statuses>
+				<ObjectStatus
+					text="{=${invoice>Discontinued} === true ? 'Discontinued' : 'In Production' }"
+					state="{=${invoice>Discontinued} === true ? 'Error' : 'Success' }" />
+				<ObjectStatus
+					text="{i18n>productStock}: {invoice>UnitsInStock}"
+					state="{=${invoice>UnitsInStock} > 0 ? 'Success' : 'Error' }" />
+			</statuses>
+			<ObjectAttribute text="{i18n>productQuantityPerUnit}: {invoice>QuantityPerUnit}" />
+			<ObjectAttribute text="{i18n>productOrders}: {invoice>UnitsOnOrder}" />
+		</ObjectHeader>
+	</Page>
+</mvc:View>

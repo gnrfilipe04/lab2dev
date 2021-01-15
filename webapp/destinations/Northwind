@@ -1,0 +1,7 @@
+Description=Northwind
+Type=HTTP
+Authentication=NoAuthentication
+WebIDEUsage=odata_gen
+Name=Northwind
+WebIDEEnabled=true
+URL=https://services.odata.org
